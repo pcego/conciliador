@@ -108,16 +108,17 @@ if ON_PAAS:
                 'PORT':     os.environ['OPENSHIFT_MYSQL_DB_PORT'],
             }
         }
-
-        
 else:
-    # stock django, local development.
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',  
+                'NAME':  'concil',
+                'USER':     'postgres',
+                'PASSWORD': 'senha',
+                'HOST':     'localhost',
+                'PORT':     '5432',
+            }
         }
-    }
 
 
 # Internationalization
