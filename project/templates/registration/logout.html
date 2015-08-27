@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block main %}
+	
+<section id="main">
+  
+  <div class="row-fluid">
+    <div class="span12">
+	    <p>Logout efetuado com sucesso</p>
+	    <a type="button"  href="{% url 'url_login' %}" class="btn btn-info">Acessar novamente</a>
+    </div>
+  </div>
+
+
+{% endblock %}
