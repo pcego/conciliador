@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-<<<<<<< HEAD
 
 class City(models.Model):
 	
@@ -38,9 +37,10 @@ class State(models.Model):
 
 	class Meta:
 		verbose_name = 'Estado'
-=======
+
 #Product Package
 class Package(models.Model):
+	
 	name = models.CharField(max_length=100)
 	description = models.CharField(max_length=200)
 	price = models.DecimalField(max_digits=10,  decimal_places=2)
@@ -50,4 +50,7 @@ class Package(models.Model):
 
 	def __str__(self):
 		return self.name
->>>>>>> d1ab1b6842fe6ce49f64a6a8738799ef1af65994
+
+	class Meta:
+		verbose_name = 'Pacotes'
+
