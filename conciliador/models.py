@@ -30,7 +30,7 @@ class City(models.Model):
 class Neighborhood(models.Model):
 		
 	name = models.CharField(max_length=100, blank=False)
-	city_id = models.ForeignKey(City)
+	city = models.ForeignKey(City)
 	active = models.BooleanField(default=True)	
 
 	def __str__(self):
