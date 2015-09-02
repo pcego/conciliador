@@ -41,6 +41,5 @@ urlpatterns = [
         {'template_name': 'registration/password_change_done.html'},
         name="password-change-done"),
 
-
     url(r'^admin/', include(admin.site.urls)),
 ]
