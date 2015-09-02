@@ -92,3 +92,48 @@ class SalePackage(models.Model):
 
 	class Meta:
 		verbose_name='VendadePacote'
+
+class Purchaser(models.Model):
+
+	company = models.ForeignKey(Company)
+	contract = models.CharField(max_length = 100, blank=False)
+	name = models.CharField(max_length = 100, blank=False)
+	device_rent_value = models.DecimalField(max_digits=10, decimal_places=2)
+	antecipation_tax = models.DecimalField(max_digits=10, decimal_places=2)
+	validate = models.DateField(help_text='Formato: dd/MM/aaaa')
+	active = models.BooleanField(default=True)
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name = 'Adquirente'
+
+class Flag(models.Model):
+
+	name = models.CharField(max_length=100, blank=False)
+	product_type = models.CharField(max_length=100, blank=False)
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name = 'Bandeira'
+
+class ProductPurchaser(models.Model):
+
+	purchaser = models.ForeignKey(Purchaser)
+	flag = models.ForeignKey(Flag)
+	name = models.CharField(max_length=100, blank=False)
+	service_tax = models.DecimalField(max_digits=10, decimal_places=2)
+	receipt_forecast = models.IntegerField()
+	bank = models.CharField(max_length=100, blank=False)
+	agency = models.CharField(max_length=10, blank=False)
+	account = models.CharField(max_length=100, blank=False)
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name = 'Produto_Adquirente'
+
