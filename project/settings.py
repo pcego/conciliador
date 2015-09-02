@@ -117,7 +117,7 @@ else:
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',  
                 'NAME':  'concil',
                 'USER':     'postgres',
-                'PASSWORD': 'senha',
+                'PASSWORD': 'pcego',
                 'HOST':     'localhost',
                 'PORT':     '5432',
             }
