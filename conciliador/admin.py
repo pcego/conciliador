@@ -1,5 +1,5 @@
 from django.contrib import admin
-from conciliador.models import  Package, State, City, Neighborhood, Company, SalePackage, Purchaser, Flag, ProductPurchaser
+from conciliador.models import Package, State, City, Neighborhood, Company, SalePackage, Purchaser, Flag, ProductPurchaser
 
 admin.site.register(Package)
 admin.site.register(State)
