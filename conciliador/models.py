@@ -113,6 +113,7 @@ class Flag(models.Model):
 
 	name = models.CharField(max_length=100, blank=False)
 	product_type = models.CharField(max_length=100, blank=False)
+	active = models.BooleanField(default=True)
 
 	def __str__(self):
 		return self.name
@@ -130,12 +131,13 @@ class ProductPurchaser(models.Model):
 	bank = models.CharField(max_length=100, blank=False)
 	agency = models.CharField(max_length=10, blank=False)
 	account = models.CharField(max_length=100, blank=False)
+	active = models.BooleanField(default=True)
 
 	def __str__(self):
 		return self.name
 
 	class Meta:
-		verbose_name = 'Produto_Adquirente'
+		verbose_name = 'Produto Adquirente'
 
 class Employee(User):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
