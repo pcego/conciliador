@@ -139,4 +139,11 @@ class ProductPurchaser(models.Model):
 
 class Employee(User):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    teste = models.TextField()
+    cpf = models.CharField(max_length=11)
+    street = models.CharField(max_length=100)
+    number = models.CharField(max_length=10)
+    complement = models.CharField(max_length=100)
+    neighborhood = models.ForeignKey(Neighborhood)
+    birth_date = models.DateField()
+    company = models.ManyToManyField(Company)
+    active = models.BooleanField()
