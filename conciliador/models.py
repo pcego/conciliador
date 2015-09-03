@@ -139,6 +139,46 @@ class ProductPurchaser(models.Model):
 	class Meta:
 		verbose_name = 'Produto Adquirente'
 
+
+class TypeContact(models.Model):
+
+    type_contact = models.CharField(max_length=100)
+    masks = models.CharField(max_length=100)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.type_contact
+
+    class Meta:
+        verbose_name = 'Departamento'
+
+class Department(models.Model):
+
+    name = models.CharField(max_length=100)
+    active = models.BooleanField(default=True)
+
+
+    def __str__(self):
+        return self.type_contact
+
+    class Meta:
+        verbose_name = 'Tipo Contato'
+
+class Contact(models.Model):
+
+    type_contact = models.ForeignKey(TypeContact)
+    value = models.CharField(max_length=200)
+    company = models.ForeignKey(Company)
+    department = models.ForeignKey(Department)
+    talk_with = models.CharField(max_length=100)
+    active = models.BooleanField(default=True)    
+
+    def __str__(self):
+        return self.value
+
+    class Meta:
+        verbose_name = 'Contato'
+
 class Employee(User):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     cpf = models.CharField(max_length=11)
