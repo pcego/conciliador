@@ -137,3 +137,6 @@ class ProductPurchaser(models.Model):
 	class Meta:
 		verbose_name = 'Produto_Adquirente'
 
+class Employee(User):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    teste = models.TextField()

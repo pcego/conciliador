@@ -1,6 +1,20 @@
 from django.contrib import admin
-from conciliador.models import Package, State, City, Neighborhood, Company, SalePackage, Purchaser, Flag, ProductPurchaser
+from django.contrib.auth.admin import UserAdmin
+from conciliador.models import  Package, State, City, ProductPurchaser
+from conciliador.models import Neighborhood, Company, Employee
+from conciliador.models import SalePackage, Purchaser, Flag
+from django.contrib.auth.models import User
 
+class EmployeeInline(admin.StackedInline):
+    model = Employee
+    can_delete = False
+    verbose_name_plural = 'employees'
+
+class UserAdmin(UserAdmin):
+    inlines = (EmployeeInline, )
+
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
 admin.site.register(Package)
 admin.site.register(State)
 admin.site.register(City)
