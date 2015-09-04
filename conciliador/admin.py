@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from conciliador.models import  Package, State, City, ProductPurchaser
 from conciliador.models import Neighborhood, Company, Employee
 from conciliador.models import SalePackage, Purchaser, Flag
+from conciliador.models import TypeContact, Department, Contact
 from django.contrib.auth.models import User
 
 class EmployeeInline(admin.StackedInline):
