@@ -25,4 +25,6 @@ admin.site.register(SalePackage)
 admin.site.register(Purchaser)
 admin.site.register(Flag)
 admin.site.register(ProductPurchaser)
-
+admin.site.register(TypeContact)
+admin.site.register(Department)
+admin.site.register(Contact)
