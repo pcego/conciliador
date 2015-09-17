@@ -63,7 +63,6 @@ class Company(models.Model):
 	company_name = models.CharField(max_length=100, blank=False)
 	cnpj = models.CharField(max_length=30)
 	state_registration = models.CharField(max_length=50)
-	cpf = models.CharField(max_length=20)
 	fantasy_name = models.CharField(max_length=100)
 	boss = models.ForeignKey(User, blank=False)
 	street = models.CharField(max_length=100)
