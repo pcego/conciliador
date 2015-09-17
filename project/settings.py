@@ -16,7 +16,6 @@ import socket
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 ON_PAAS = 'OPENSHIFT_REPO_DIR' in os.environ
 
 if ON_PAAS:
@@ -160,3 +159,13 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(BASE_DIR, 'templates'),
 )
+
+SANDBOX = True
+URL_SANDBOX = 'http://sandbox.concildesenvolvedores.com.br:80/concilcard/v1/'
+URL_PRODUCTION = 'http://concildesenvolvedores.com.br:80/concilcard/v1/'
+
+URL_MAIN = URL_SANDBOX if SANDBOX else URL_PRODUCTION
+
+# Methods URLS
+URL_RETORNO_VENDAS = '/retorno/vendas'
+APP_TOKEN = 'LICin04WKos8'
