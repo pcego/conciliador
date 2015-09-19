@@ -161,11 +161,13 @@ TEMPLATE_DIRS = (
 )
 
 SANDBOX = True
-URL_SANDBOX = 'http://sandbox.concildesenvolvedores.com.br:80/concilcard/v1/'
-URL_PRODUCTION = 'http://concildesenvolvedores.com.br:80/concilcard/v1/'
+URL_SANDBOX = 'http://sandbox.concildesenvolvedores.com.br/concilcard/v1/'
+URL_PRODUCTION = 'http://concildesenvolvedores.com.br/concilcard/v1/'
 
 URL_MAIN = URL_SANDBOX if SANDBOX else URL_PRODUCTION
 
 # Methods URLS
-URL_RETORNO_VENDAS = '/retorno/vendas'
 APP_TOKEN = 'LICin04WKos8'
+
+#URLs de metodos
+URL_RETORNO_VENDAS = '/retorno/vendas'

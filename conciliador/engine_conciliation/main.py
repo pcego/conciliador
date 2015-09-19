@@ -1,11 +1,17 @@
 #coding:utf-8
 import urllib3, json
 
+http = urllib3.PoolManager()
+http.headers['app-token'] = 'LICin04WKos8'
+http.headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36'
+r = http.request('GET', 'http://sandbox.concildesenvolvedores.com.br/concilcard/v1/retornos/vendas',  {'clienteId': 1})
+r = http.request('GET', 'http://sandbox.concildesenvolvedores.com.br/concilcard/v1/retornos/vendas?clienteId=1')
+                                      'http://sandbox.concildesenvolvedores.com.br/concilcard/v1/retornos/vendas?clienteId=1'
 
 # Exemple
 http = urllib3.PoolManager()
-r = http.request('GET', 'http://worldcup.sfg.io/matches')
-r = http.request('GET', 'http://sandbox.concildesenvolvedores.com.br:80/concilcard/v1/retornos/vendas',  {'app-token': 'LICin04WKos8', 'clienteId': 1})
+r = http.request('GET', 'http://worldcup.sfg.io/matches ')
+r = http.request('GET', 'http://sandbox.concildesenvolvedores.com.br:80/concilcard/v1/retornos/vendas',  {'clienteId': 1})
 
 for jogo in json.loads(r.data.decode('utf-8')):
     if jogo['status'] == 'completed':
