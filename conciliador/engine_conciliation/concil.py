@@ -1,5 +1,6 @@
 from project import settings
 import urllib3, json
+from models import RetornoVendas
 
 
 class Concil(object):
@@ -10,11 +11,13 @@ class Concil(object):
         self.http.headers['app-token'] = settings.APP_TOKEN
 
     def retorno_vendas(self, client_id):
+        obj = RetornoVendas()
         r = self.http.request('GET', self.url + settings.URL_RETORNO_VENDAS, {'clienteId':client_id})
+
+        obj.parse(json.loads(r.data.decode('utf-8'))
         
-        for retornos in json.loads(r.data.decode('utf-8')):
-            for ret in retornos:
-                print (retornos['adquirente'], retornos['autorizacao'], retornos['bandeira'])
+        return obj
 
 
-        #Agora e fazer o parse e devolver um objeto
+
+obj.lista_retornos
