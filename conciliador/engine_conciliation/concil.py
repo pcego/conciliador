@@ -2,19 +2,6 @@ from project import settings
 import urllib3, json
 from conciliador.engine_conciliation.models.venda import Venda
 
-'''SANDBOX = True
-URL_SANDBOX = 'http://sandbox.concildesenvolvedores.com.br/concilcard/v1/'
-URL_PRODUCTION = 'http://concildesenvolvedores.com.br/concilcard/v1/'
-
-URL_MAIN = URL_SANDBOX if SANDBOX else URL_PRODUCTION
-
-# Methods URLS
-APP_TOKEN = 'LICin04WKos8'
-
-#URLs de metodos
-URL_RETORNO_VENDAS = 'retornos/vendas'
-'''
-
 
 class Concil(object):
 
@@ -39,12 +26,3 @@ class Concil(object):
             lista_retornos.append(venda)
 
         return lista_retornos
-
-'''
-conc = Concil()        
-lista = conc.retorno_vendas(client_id=1)
-
-for i in lista:
-    print(i.produto)
-
-'''

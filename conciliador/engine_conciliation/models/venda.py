@@ -35,6 +35,3 @@ class Venda(object):
         self.dataVenda = venda['dataVenda']
         self.key = venda['key']
         self.notaFiscal = venda['notaFiscal']
-
-
-'''{'filialCodigo': '001', 'tid': '0', 'nsu': '123456789012345', 'valorLiquidoConta': '250.00', 'produto': 'CREDITO', 'key': '12560', 'filialId': 8, 'statusConciliacao': 'PENDENTE', 'sistemaOrigem': 'PRESENCE', 'adquirente': 'CIELO', 'bandeira': 'AMEX', 'notaFiscal': '1448305', 'dataDePrevisaoDoVencimento': '30/09/2015', 'quantidadeDeParcelas': 0, 'lancamentoId': 748401, 'clienteId': '1', 'valorBrutoConta': '260.00', 'numeroDaParcela': 1, 'dataVenda': '16/09/2015', 'autorizacao': '0'}'''
