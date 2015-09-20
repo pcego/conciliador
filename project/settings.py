@@ -170,4 +170,4 @@ URL_MAIN = URL_SANDBOX if SANDBOX else URL_PRODUCTION
 APP_TOKEN = 'LICin04WKos8'
 
 #URLs de metodos
-URL_RETORNO_VENDAS = '/retorno/vendas'
+URL_RETORNO_VENDAS = 'retornos/vendas'

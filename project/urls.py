@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 urlpatterns = [
     url(r'^$', 'project.views.home', name='home'),
     url(r'^conc/', include('conciliador.urls')),
-
+    
     url(r'^register/',
         CreateView.as_view(
             template_name='registration/register.html',

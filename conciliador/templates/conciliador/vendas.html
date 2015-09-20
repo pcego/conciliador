@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+titulo
+{% endblock %}
+
+{% block main %}
+	<h1>Vendas</h1>
+	<form method="POST">
+		{% csrf_token %}
+		{{ form }}
+		<button type='submit'>Consultar</button>
+	</form>
+
+	<ul>
+		{% for i in lista %}
+			<li>Produto: {{i.produto}}</li>
+			<li>Bandeira: {{i.bandeira}}</li>
+			<li>Adquirente: {{i.adquirente}}</li>
+			<li>Previsao do vencimento: {{i.dataDePrevisaoDoVencimento}}</li>
+			<li>Data da venda: {{i.dataVenda}}</li>
+			<li>Nota fiscal: {{i.notaFiscal}}</li>
+			<li>Status da conciliaçao: {{i.statusConciliacao}}</li>
+		{% endfor %}
+	</ul>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
