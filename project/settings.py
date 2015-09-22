@@ -171,3 +171,4 @@ APP_TOKEN = 'LICin04WKos8'
 
 #URLs de metodos
 URL_RETORNO_VENDAS = 'retornos/vendas'
+URL_RETORNO_RECEBIMENTOS = 'retornos/recebimentos'
