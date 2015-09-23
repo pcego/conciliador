@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from conciliador.forms import Vendas, Recebimentos, ConciliacoesVendas
+from conciliador.forms import Vendas, Recebimentos, ConciliacoesVendas, ConciliacoesRecebimentos
 from conciliador.forms import Lancamento
 from conciliador.engine_conciliation.concil import Concil
 
@@ -33,7 +33,8 @@ def recebimentos(request):
 
         if form.is_valid():
             conc = Concil()        
-            lista = conc.retorno_recebimentos(client_id=form.cleaned_data['cliente_id'], status=form.cleaned_data['status'], 
+            lista = conc.retorno_recebimentos(client_id=form.cleaned_data['cliente_id'], 
+                status=form.cleaned_data['status'], 
                 dataInicial=form.cleaned_data['dataInicial'], dataFinal=form.cleaned_data['dataFinal'], 
                 adquirente=form.cleaned_data['adquirente'], bandeira=form.cleaned_data['bandeira'], 
                 tipoRetorno=form.cleaned_data['tipoRetorno'])
@@ -88,3 +89,23 @@ def lancamentos_vendas(request):
         form = Lancamento()
         data['form'] = form
     return render(request, 'conciliador/lancamentos_vendas.html', data)
+
+def conciliacoes_recebimentos(request):
+    data = {}
+
+    if request.method == 'POST':
+        form = ConciliacoesRecebimentos(request.POST or None)
+
+        if form.is_valid():
+            conc = Concil()        
+            lista = conc.conciliacoes_recebimentos(client_id=form.cleaned_data['cliente_id'], 
+                dataInicial=form.cleaned_data['dataInicial'], dataFinal=form.cleaned_data['dataFinal'])    
+            form = ConciliacoesRecebimentos()
+            data['form'] = form
+            data['lista'] = lista
+        else:
+            data['form'] = form
+    else:
+        form = ConciliacoesRecebimentos()
+        data['form'] = form
+    return render(request, 'conciliador/conciliacoes_recebimentos.html', data)

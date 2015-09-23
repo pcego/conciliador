@@ -32,3 +32,10 @@ class Lancamento(forms.Form):
     data_Inicial = forms.CharField(label='Data Inicial', max_length=20)
     data_Final = forms.CharField(label='Data Final', max_length=20)
 
+class ConciliacoesRecebimentos(forms.Form):
+    cliente_id = forms.CharField(
+        label='Codigo do cliente', max_length=100)
+    dataInicial = forms.CharField(
+        label='Data inicial', max_length=100)
+    dataFinal = forms.CharField(
+        label='Data final', max_length=100)
