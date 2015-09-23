@@ -2,7 +2,7 @@ from project import settings
 import urllib3, json
 from conciliador.engine_conciliation.models.venda import Venda
 from conciliador.engine_conciliation.models.recebimentos import Recebimentos
-from conciliador.engine_conciliation.models.conciliacoesvendas import ConciliacoesVendas
+
 class Concil(object):
 
     def __init__(self):
@@ -27,14 +27,17 @@ class Concil(object):
 
         return lista_retornos
 
-    def retorno_recebimentos(self, client_id, status, dataInicial, dataFinal, adquirente, bandeira, tipoRetorno):
+    def retorno_recebimentos(self, client_id, status, dataInicial, 
+        dataFinal, adquirente, bandeira, tipoRetorno):
         lista_retornos = []
         lista_recebimentos = []
         recebimentos = Recebimentos()
 
         r = self.http.request(
             'GET', self.url + settings.URL_RETORNO_RECEBIMENTOS,
-            {'clienteId':client_id, 'status':status, 'dataInicial':dataInicial, 'dataFinal':dataFinal, 'adquirente':adquirente, 'bandeira':bandeira, 'tipoRetorno':tipoRetorno})
+            {'clienteId':client_id, 'status':status, 'dataInicial':dataInicial, 
+            'dataFinal':dataFinal, 'adquirente':adquirente, 'bandeira':bandeira, 
+            'tipoRetorno':tipoRetorno})
 
         lista_recebimentos = json.loads(r.data.decode('utf-8'))['retornos']
 
@@ -45,18 +48,24 @@ class Concil(object):
         return lista_retornos
 
     def conciliacoes_vendas(self, client_id):
-        lista_retornos = []
         lista_conciliacoes_vendas = []
-        conciliacoesvendas = ConciliacoesVendas()
-
+       
         r = self.http.request(
-            'GET', self.url + settings.URL_RETORNO_RECEBIMENTOS,
+            'GET', self.url + settings.URL_CONCILIACOES_VENDAS,
             {'clienteId':client_id})
 
-        conciliacoes_vendas = json.loads(r.data.decode('utf-8'))['conciliacoes']
+        lista_conciliacoes_vendas = json.loads(r.data.decode('utf-8'))['conciliacoes']
+        
+        return lista_conciliacoes_vendas
 
-        for v in  conciliacoes_vendas:
-            conciliacoesvendas.parse(v)
-            lista_retornos.append(conciliacoesvendas)
-
-        return lista_retornos
+    def lancamentos_vendas(self, client_id, data_Inicial, data_Final):
+        
+        lista_lancamentos = []
+               
+        r = self.http.request(
+            'GET', self.url + settings.URL_LANCAMENTOS_VENDAS,
+            {'clienteId':client_id, 'dataInicial':data_Inicial, 'dataFinal': data_Final})
+        
+        lista_lancamentos = json.loads(r.data.decode('utf-8'))['lancamentos']
+       
+        return lista_lancamentos

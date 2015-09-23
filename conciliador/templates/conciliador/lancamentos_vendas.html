@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+titulo
+{% endblock %}
+
+{% block main %}
+	<h1>Lancamentos</h1>
+	<form method="POST">
+		{% csrf_token %}
+		{{ form }}
+		<button type='submit'>Consultar</button>
+	</form>
+	<br><br>
+	<ul>
+		{% for lancamento in lista %}			
+			<li>Adquirente: {{lancamento.adquirente}}</li>			
+			<li>Bandeira: {{lancamento.bandeira}}</li>			
+			<li>Produto: {{lancamento.produto}}</li>			
+			<li>Quantidade Lancamentos: {{lancamento.quantidadeLanctosContra}}</li>			
+			<li>Valor Bruto: {{lancamento.valorBruto}}</li>
+			<br><br>			
+		{% endfor %}
+	</ul>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
