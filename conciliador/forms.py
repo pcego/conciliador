@@ -20,3 +20,9 @@ class Recebimentos(forms.Form):
         label='Bandeira', max_length=100)
     tipoRetorno = forms.CharField(
         label='Tipo de retorno: LANCAMENTO ou CONCILIACAO(Default)', max_length=100)
+
+
+class Lancamento(forms.Form):
+    cliente_id = forms.CharField(label='Código do Cliente', max_length = 100)
+    data_Inicial = forms.CharField(label='Data Inicial', max_length=20)
+    data_Final = forms.CharField(label='Data Final', max_length=20)
