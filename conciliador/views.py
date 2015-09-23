@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from conciliador.forms import Vendas, Recebimentos
+from conciliador.forms import Vendas, Recebimentos, ConciliacoesVendas
 from conciliador.engine_conciliation.concil import Concil
 
 def home(request):
@@ -45,3 +45,22 @@ def recebimentos(request):
         form = Recebimentos()
         data['form'] = form
     return render(request, 'conciliador/recebimentos.html', data)
+
+def conciliacoesvendas(request):
+    data = {}
+
+    if request.method == 'POST':
+        form = ConciliacoesVendas(request.POST or None)
+
+        if form.is_valid():
+            conc = Concil()        
+            lista = conc.conciliacoes_vendas(client_id=form.cleaned_data['cliente_id'])
+            form = ConciliacoesVendas()
+            data['form'] = form
+            data['lista'] = lista
+        else:
+            data['form'] = form
+    else:
+        form = ConciliacoesVendas()
+        data['form'] = form
+    return render(request, 'conciliador/conciliacoesvendas.html', data)

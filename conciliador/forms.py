@@ -20,3 +20,7 @@ class Recebimentos(forms.Form):
         label='Bandeira', max_length=100)
     tipoRetorno = forms.CharField(
         label='Tipo de retorno: LANCAMENTO ou CONCILIACAO(Default)', max_length=100)
+
+class ConciliacoesVendas(forms.Form):
+    cliente_id = forms.CharField(
+        label='Codigo do cliente', max_length=100)
