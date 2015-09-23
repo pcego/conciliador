@@ -1,7 +1,6 @@
 from project import settings
 import urllib3, json
 from conciliador.engine_conciliation.models.venda import Venda
-from conciliador.engine_conciliation.models.recebimentos import Recebimentos
 
 class Concil(object):
 
@@ -29,9 +28,8 @@ class Concil(object):
 
     def retorno_recebimentos(self, client_id, status, dataInicial, 
         dataFinal, adquirente, bandeira, tipoRetorno):
-        lista_retornos = []
+
         lista_recebimentos = []
-        recebimentos = Recebimentos()
 
         r = self.http.request(
             'GET', self.url + settings.URL_RETORNO_RECEBIMENTOS,
@@ -41,11 +39,7 @@ class Concil(object):
 
         lista_recebimentos = json.loads(r.data.decode('utf-8'))['retornos']
 
-        for v in  lista_recebimentos:
-            recebimentos.parse(v)
-            lista_retornos.append(recebimentos)
-
-        return lista_retornos
+        return lista_recebimentos
 
     def conciliacoes_vendas(self, client_id):
         lista_conciliacoes_vendas = []
@@ -55,7 +49,7 @@ class Concil(object):
             {'clienteId':client_id})
 
         lista_conciliacoes_vendas = json.loads(r.data.decode('utf-8'))['conciliacoes']
-        
+
         return lista_conciliacoes_vendas
 
     def lancamentos_vendas(self, client_id, data_Inicial, data_Final):
