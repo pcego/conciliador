@@ -49,14 +49,27 @@ class Concil(object):
         return lista_retornos
 
 
-    def lancamentos_vendas(self, client_id, data_Inicial, data_Final):
+    def lancamentos_vendas(self, client_id, data_inicial, data_final):
         
         lista_lancamentos = []
                
         r = self.http.request(
             'GET', self.url + settings.URL_LANCAMENTOS_VENDAS,
-            {'clienteId':client_id, 'dataInicial':data_Inicial, 'dataFinal': data_Final})
+            {'clienteId':client_id, 'dataInicial':data_inicial, 'dataFinal': data_final})
         
         lista_lancamentos = json.loads(r.data.decode('utf-8'))['lancamentos']
        
         return lista_lancamentos
+
+
+    def lancamentos_filiais(self, client_id, data_inicial, data_final):
+        
+        lista_lancamentos_filiais = []
+               
+        r = self.http.request(
+            'GET', self.url + settings.URL_LANCAMENTOS_VENDAS_FILIAIS,
+            {'clienteId':client_id, 'dataInicial':data_inicial, 'dataFinal': data_final})
+        
+        lista_lancamentos_filiais = json.loads(r.data.decode('utf-8'))['lancamentos']
+       
+        return lista_lancamentos_filiais

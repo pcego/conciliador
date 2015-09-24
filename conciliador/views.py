@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from conciliador.forms import Vendas, Recebimentos
-from conciliador.forms import Lancamento
+from conciliador.forms import Lancamento, LancamentoFilial
 from conciliador.engine_conciliation.concil import Concil
 
 def home(request):
@@ -59,8 +59,8 @@ def lancamentos_vendas(request):
             conc = Concil()        
             lista = conc.lancamentos_vendas(
                 client_id=form.cleaned_data['cliente_id'], 
-                data_Inicial=form.cleaned_data['data_Inicial'], 
-                data_Final=form.cleaned_data['data_Final'],)
+                data_inicial=form.cleaned_data['data_inicial'], 
+                data_final=form.cleaned_data['data_final'],)
             form = Lancamento()
             data['form'] = form
             data['lista'] = lista
@@ -70,3 +70,27 @@ def lancamentos_vendas(request):
         form = Lancamento()
         data['form'] = form
     return render(request, 'conciliador/lancamentos_vendas.html', data)
+
+
+def lancamentos_filiais(request):
+    
+    data = {}
+
+    if request.method == 'POST':
+        form = LancamentoFilial(request.POST or None)
+
+        if form.is_valid():
+            conc = Concil()        
+            lista = conc.lancamentos_vendas_filiais(
+                client_id=form.cleaned_data['cliente_id'], 
+                data_inicial=form.cleaned_data['data_inicial'], 
+                data_final=form.cleaned_data['data_final'],)
+            form = LancamentoFilial()
+            data['form'] = form
+            data['lista'] = lista
+        else:
+            data['form'] = form
+    else:
+        form = LancamentoFilial()
+        data['form'] = form
+    return render(request, 'conciliador/lancamentos_filiais.html', data)
