@@ -3,7 +3,6 @@ from conciliador.forms import Vendas, Recebimentos
 from conciliador.forms import Lancamento, LancamentoFilial
 from conciliador.forms import Vendas, Recebimentos
 from conciliador.forms import ConciliacoesVendas, ConciliacoesRecebimentos
-from conciliador.forms import Lancamento
 from conciliador.engine_conciliation.concil import Concil
 
 def home(request):
@@ -103,7 +102,7 @@ def lancamentos_filiais(request):
 
         if form.is_valid():
             conc = Concil()        
-            lista = conc.lancamentos_vendas_filiais(
+            lista = conc.lancamentos_filiais(
                 client_id=form.cleaned_data['cliente_id'], 
                 data_inicial=form.cleaned_data['data_inicial'], 
                 data_final=form.cleaned_data['data_final'],)
@@ -115,6 +114,7 @@ def lancamentos_filiais(request):
     else:
         form = LancamentoFilial()
         data['form'] = form
+        #import pdb;pdb.set_trace()
     return render(request, 'conciliador/lancamentos_filiais.html', data)
 
 
