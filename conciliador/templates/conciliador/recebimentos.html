@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+titulo
+{% endblock %}
+
+{% block main %}
+	<h1>Recebimentos</h1>
+	<form method="POST">
+		{% csrf_token %}
+		{{ form }}
+		<button type='submit'>Consultar</button>
+	</form>
+	
+	<ul>
+		{% for i in lista %}
+			<li>Chave de identificação do lançamento: {{i.key}}</li>
+			<li>ID do Lançamento: {{i.lancamentoId}}</li>
+			<li>Status Conciliação: {{i.statusConciliacao}}</li>
+			<li>Adquirente: {{i.adquirente}}</li>
+			<li>CNPJ do estabelecimento: {{i.cnpj}}</li>
+			<li>Bandeira: {{i.bandeira}}</li>
+			<li>Produto: {{i.produto}}</li>
+			<li>Número da parcela da transação: {{i.numeroDaParcela}}</li>
+			<li>Quantidade de parcelas da transação: {{i.quantidadeDeParcelas}}</li>
+			<li>Sequencial único que identifica a transação na Adquirente: {{i.nsu}}</li>
+			<li>Número de autorização da Bandeira na transação: {{i.autorizacao}}</li>
+			<li>Identificador da transação em E-Commerce: {{i.tid}}</li>
+			<li>Valor da bruto da parcela de venda da conta: {{i.valorBrutoConta}}</li>
+			<li>Valor da bruto da parcela de venda da contra partida: {{i.valorBrutoContraPartida}}</li>	
+			<li>Valor líquido da parcela(Descontado a taxa de administração): {{i.valorLiquidoConta}}</li>
+			<li>Valor líquido Contra: {{i.valorLiquidoContraPartida}}</li>
+			<li>Taxa da conta: {{i.taxaConta}}</li>
+			<li>Taxa da contra partida: {{i.taxaContraPartida}}</li>
+			<li>Código do banco: {{i.banco}}</li>
+			<li>Agência: {{i.agencia}}</li>
+			<li>Conta bancária: {{i.conta}}</li>
+			<li>Identificação do Terminal / Máquina: {{i.terminal}}</li>
+			<li>Estabelecimento: {{i.estabelecimento}}</li>
+			<li>Data da Venda: {{i.dataVenda}}</li>
+			<li>Data de recebimento: {{i.dataRecebimento}}</li>
+			<li>Sistema de origem do lançamento: {{i.sistemaOrigem}}</li>
+			<li>Data de previsão de vencimento da parcela: {{i.dataDePrevisaoDoVencimento}}</li>
+			<li>Nota Fiscal: {{i.notaFiscal}}</li>
+			<br><br>
+		{% endfor %}
+	</ul>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
