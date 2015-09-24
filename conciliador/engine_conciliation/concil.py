@@ -1,8 +1,6 @@
 from project import settings
 import urllib3, json
 from conciliador.engine_conciliation.models.venda import Venda
-from conciliador.engine_conciliation.models.recebimentos import Recebimentos
-
 
 class Concil(object):
 
@@ -30,9 +28,8 @@ class Concil(object):
 
     def retorno_recebimentos(self, client_id, status, dataInicial, 
         dataFinal, adquirente, bandeira, tipoRetorno):
-        lista_retornos = []
+
         lista_recebimentos = []
-        recebimentos = Recebimentos()
 
         r = self.http.request(
             'GET', self.url + settings.URL_RETORNO_RECEBIMENTOS,
@@ -42,12 +39,18 @@ class Concil(object):
 
         lista_recebimentos = json.loads(r.data.decode('utf-8'))['retornos']
 
-        for v in  lista_recebimentos:
-            recebimentos.parse(v)
-            lista_retornos.append(recebimentos)
+        return lista_recebimentos
 
-        return lista_retornos
+    def conciliacoes_vendas(self, client_id):
+        lista_conciliacoes_vendas = []
+       
+        r = self.http.request(
+            'GET', self.url + settings.URL_CONCILIACOES_VENDAS,
+            {'clienteId':client_id})
 
+        lista_conciliacoes_vendas = json.loads(r.data.decode('utf-8'))['conciliacoes']
+
+        return lista_conciliacoes_vendas
 
     def lancamentos_vendas(self, client_id, data_inicial, data_final):
         
@@ -73,3 +76,15 @@ class Concil(object):
         lista_lancamentos_filiais = json.loads(r.data.decode('utf-8'))['lancamentos']
        
         return lista_lancamentos_filiais
+
+
+    def conciliacoes_recebimentos(self, client_id, dataInicial, dataFinal):
+        lista_conciliacoes_recebimentos = []
+       
+        r = self.http.request(
+            'GET', self.url + settings.URL_CONCILIACOES_RECEBIMENTOS,
+            {'clienteId':client_id, 'dataInicial':dataInicial, 'dataFinal': dataFinal})
+
+        lista_conciliacoes_recebimentos = json.loads(r.data.decode('utf-8'))['conciliacoes']
+
+        return lista_conciliacoes_recebimentos
