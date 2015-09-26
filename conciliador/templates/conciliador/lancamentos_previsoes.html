@@ -5,7 +5,6 @@ titulo
 {% endblock %}
 
 {% block main %}
-	
 	<h1>Lancamentos</h1>
 	<form method="POST">
 		{% csrf_token %}
@@ -16,12 +15,9 @@ titulo
 	<ul>
 		{% for lancamento in lista %}			
 			<li>Adquirente: {{lancamento.adquirente}}</li>			
-			<li>Bandeira: {{lancamento.bandeira}}</li>						
-			<li>Codigo Filial: {{lancamento.filialCodigo}}</li>			
-			<li>Id Filial: {{lancamento.filialId}}</li>
-			<li>Produto: {{lancamento.produto}}</li>
-			<li>Quantidade Lancamentos: {{lancamento.quantidadeLanctosContra}}</li>				
-			<li>Valor Bruto: {{lancamento.valorBruto}}</li>
+			<li>Agencia: {{lancamento.agencia}}</li>			
+			<li>Quantidade De Lancamentos: {{lancamento.quantidadeDeLancamentos}}</li>			
+			<li>Valor Liquido: {{lancamento.valorLiquido}}</li>
 			<br><br>			
 		{% endfor %}
 	</ul>

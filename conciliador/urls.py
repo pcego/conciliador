@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^lancamentos/vendas$', 'conciliador.views.lancamentos_vendas',name='url_lancamentos'),
     url(r'^lancamentos/vendas/filiais', 'conciliador.views.lancamentos_filiais',name='url_lancamentos_filiais'),
     url(r'^conciliacoes/recebimentos', 'conciliador.views.conciliacoes_recebimentos',name='url_conciliacoesrecebimentos'),  
+    url(r'^lancamentos/previsoes', 'conciliador.views.lancamentos_previsoes',name='url_lancamentos_previsoes'),  
 ]

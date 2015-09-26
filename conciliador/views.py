@@ -3,6 +3,7 @@ from conciliador.forms import Vendas, Recebimentos
 from conciliador.forms import Lancamento, LancamentoFilial
 from conciliador.forms import Vendas, Recebimentos
 from conciliador.forms import ConciliacoesVendas, ConciliacoesRecebimentos
+from conciliador.forms import LancamentoPrevisao
 from conciliador.engine_conciliation.concil import Concil
 
 def home(request):
@@ -137,3 +138,27 @@ def conciliacoes_recebimentos(request):
         form = ConciliacoesRecebimentos()
         data['form'] = form
     return render(request, 'conciliador/conciliacoes_recebimentos.html', data)
+
+
+def lancamentos_previsoes(request):
+    
+    data = {}
+
+    if request.method == 'POST':
+        form = LancamentoPrevisao(request.POST or None)
+
+        if form.is_valid():
+            conc = Concil()        
+            lista = conc.lancamento_previsoes(
+                client_id=form.cleaned_data['cliente_id'], 
+                data_inicial=form.cleaned_data['data_inicial'], 
+                data_final=form.cleaned_data['data_final'])    
+            form = LancamentoPrevisao()
+            data['form'] = form
+            data['lista'] = lista
+        else:
+            data['form'] = form
+    else:
+        form = LancamentoPrevisao
+        data['form'] = form
+    return render(request, 'conciliador/lancamentos_previsoes.html', data)

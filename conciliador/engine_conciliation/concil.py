@@ -61,7 +61,7 @@ class Concil(object):
             {'clienteId':client_id, 'dataInicial':data_inicial, 'dataFinal': data_final})
         
         lista_lancamentos = json.loads(r.data.decode('utf-8'))['lancamentos']
-       
+        import pdb;pdb.set_trace()       
         return lista_lancamentos
 
 
@@ -88,3 +88,16 @@ class Concil(object):
         lista_conciliacoes_recebimentos = json.loads(r.data.decode('utf-8'))['conciliacoes']
 
         return lista_conciliacoes_recebimentos
+
+
+    def lancamento_previsoes(self, client_id, dataInicial, dataFinal):
+        
+        lista_previsoes = []
+       
+        r = self.http.request(
+            'GET', self.url + settings.URL_LANCAMENTOS_PREVISOES,
+            {'clienteId':client_id, 'dataInicial':dataInicial, 'dataFinal': dataFinal})
+
+        lista_previsoes = json.loads(r.data.decode('utf-8'))['lancamentos']
+
+        return lista_previsoes
