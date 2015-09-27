@@ -1,4 +1,6 @@
 from django import forms
+from conciliador.models import Venda
+from django.forms import ModelForm
 
 class Vendas(forms.Form):
     cliente_id = forms.CharField(label='Codigo do cliente', max_length=100)
@@ -48,3 +50,8 @@ class ConciliacoesVendasFiliais(forms.Form):
     cliente_id = forms.CharField(label='Codigo do cliente', max_length=100)
     dataInicial = forms.CharField(label='Data inicial', max_length=100)
     dataFinal = forms.CharField(label='Data final', max_length=100)
+
+class FormVenda(ModelForm):
+    class Meta:
+        model = Venda
+        exclude = ['']

@@ -61,3 +61,17 @@ vendasRequest {
     key: '4543234',
     notaFiscal: '54354',
 }'''
+
+
+vendasRequest {
+clienteId: 1,
+filialId: 1,
+adquirente: CIELO,
+cnpj: 08911905000125,
+bandeira: VISA,
+quantidadeDeParcelas:12,
+valorBruto: 1,
+dataVenda:11112011,
+origem:ERP,
+key: 1
+}

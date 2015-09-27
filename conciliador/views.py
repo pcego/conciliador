@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from conciliador.forms import Vendas, RetornosRecebimentos
 from conciliador.forms import Lancamento, LancamentoFilial, ConciliacoesVendasFiliais
-from conciliador.forms import ConciliacoesVendas, ConciliacoesRecebimentos
+from conciliador.forms import ConciliacoesVendas, ConciliacoesRecebimentos, FormVenda
 from conciliador.forms import LancamentoPrevisao
 from conciliador.engine_conciliation.concil import Concil
 
@@ -179,3 +179,24 @@ def conciliacoes_vendas_filiais(request):
             form = ConciliacoesVendasFiliais()
             data['form'] = form
     return render(request, 'conciliador/conciliacoes_vendas_filiais.html', data)
+
+def venda(request):
+    data = {}
+
+    if request.method == 'POST':
+        form = ConciliacoesVendasFiliais(request.POST or None)
+
+        if form.is_valid():
+            form.save()
+            conc = Concil()        
+            lista = conc.nova_venda(vendasRequest=form.cleaned_data['vendasRequest'])
+            data=['Venda salva com sucesso']
+            form = FormVenda()
+            data['form'] = form
+        else:
+            data['form'] = form
+    else:
+        form = FormVenda()
+        data['form'] = form
+
+    return render(request, 'conciliador/nova_vendas.html', data)

@@ -19,7 +19,7 @@ class Concil(object):
             {'clienteId':client_id})
 
         try:
-            lista_vendas = json.loads(r.data.decode('utf-8'))['retornos']
+            lista_vendas = json.loads(r.data.decode('utf-8'))['retornos'][0]
             for v in  lista_vendas:
                 venda.parse(v)
                 lista_retornos.append(venda)
@@ -115,3 +115,12 @@ class Concil(object):
         lista_conciliacoes_vendas_filiais = json.loads(r.data.decode('utf-8'))['conciliacoes']
 
         return lista_conciliacoes_vendas_filiais
+
+    def nova_venda(self, venda):
+        try:
+            r = self.http.request(
+                'GET', self.url + settings.URL_VENDA,
+                {'vendasRequest':venda})    
+            return True
+        except Exception, e:
+            return True

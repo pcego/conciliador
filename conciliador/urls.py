@@ -26,4 +26,6 @@ urlpatterns = [
     url(r'^conciliacoes/vendas/filiais', 
     	'conciliador.views.conciliacoes_vendas_filiais', 
     	name='url_conciliacoes_vendas_filiais'),  
+    url(r'^conciliacoes/vendas/novo','conciliador.views.venda',
+        name='url_venda'),  
 ]

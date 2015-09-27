@@ -188,3 +188,28 @@ class Employee(User):
     birth_date = models.DateField()
     company = models.ManyToManyField(Company)
     active = models.BooleanField()
+
+class Venda(models.Model):
+    clienteId =models.IntegerField()
+    filialId =models.IntegerField()
+    adquirente = models.CharField(max_length=150)
+    cnpj = models.CharField(max_length=150)
+    bandeira = models.CharField(max_length=150)
+    produto = models.CharField(max_length=150)
+    numeroDaParcela =models.IntegerField()
+    quantidadeDeParcelas =models.IntegerField()
+    NSU =models.IntegerField()
+    autorizacao =models.IntegerField()
+    TID =models.IntegerField()
+    valorBruto =models.FloatField()
+    valorLiquido =models.FloatField()
+    cliente = models.CharField(max_length=150)
+    dataVenda = models.DateField()
+    origem = models.CharField(max_length=150)
+    key = models.CharField(max_length=150)
+    dataPrevisaoVencimento = models.DateField()
+    notaFiscal = models.CharField(max_length=150)
+
+
+    def __str__(self):
+        return str(self.clienteId)
