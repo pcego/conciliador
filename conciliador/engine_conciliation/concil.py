@@ -18,12 +18,14 @@ class Concil(object):
             'GET', self.url + settings.URL_RETORNO_VENDAS,
             {'clienteId':client_id})
 
-        lista_vendas = json.loads(r.data.decode('utf-8'))['retornos']
-
-        for v in  lista_vendas:
-            venda.parse(v)
-            lista_retornos.append(venda)
-
+        try:
+            lista_vendas = json.loads(r.data.decode('utf-8'))['retornos']
+            for v in  lista_vendas:
+                venda.parse(v)
+                lista_retornos.append(venda)
+        except Exception:
+            pass
+            # Gravar no log 
         return lista_retornos
 
     def retorno_recebimentos(self, client_id, status, dataInicial, 
