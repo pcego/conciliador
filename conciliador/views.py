@@ -156,8 +156,10 @@ def lancamentos_previsoes(request):
             data['form'] = form
             data['lista'] = lista
         else:
-            form = LancamentoPrevisao
             data['form'] = form
+    else:
+        form = LancamentoPrevisao
+        data['form'] = form
     return render(request, 'conciliador/lancamentos_previsoes.html', data)
 
 def conciliacoes_vendas_filiais(request):
@@ -176,9 +178,12 @@ def conciliacoes_vendas_filiais(request):
             data['form'] = form
             data['lista'] = lista
         else:
-            form = ConciliacoesVendasFiliais()
             data['form'] = form
+    else:
+        form = ConciliacoesVendasFiliais()
+        data['form'] = form
     return render(request, 'conciliador/conciliacoes_vendas_filiais.html', data)
+
 
 def venda(request):
     data = {}

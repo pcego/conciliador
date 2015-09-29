@@ -122,5 +122,5 @@ class Concil(object):
                 'GET', self.url + settings.URL_VENDA,
                 {'vendasRequest':venda})    
             return True
-        except Exception, e:
+        except Exception:
             return True
