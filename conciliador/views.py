@@ -17,7 +17,11 @@ def retornos_vendas(request):
 
         if form.is_valid():
             conc = Concil()        
-            lista = conc.retorno_vendas(client_id=form.cleaned_data['cliente_id'])
+            lista = conc.retorno_vendas(
+                client_id=form.cleaned_data['cliente_id'],
+                statusConciliacao=form.cleaned_data['statusConciliacao'],
+                dataInicial=form.cleaned_data['dataInicial'], 
+                dataFinal=form.cleaned_data['dataFinal'])    
             form = Vendas()
             data['form'] = form
             data['lista'] = lista

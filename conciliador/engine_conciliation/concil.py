@@ -9,7 +9,8 @@ class Concil(object):
         self.url = settings.URL_MAIN
         self.http.headers['app-token'] = settings.APP_TOKEN
 
-    def retorno_vendas(self, client_id):
+    def retorno_vendas(self, client_id, statusConciliacao, dataInicial, 
+        dataFinal):
         lista_retornos = []
         lista_vendas = []
         venda = Venda()
