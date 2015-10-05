@@ -146,3 +146,14 @@ class Concil(object):
         lista_conciliacoes_recebimentos_filiais_id = json.loads(r.data.decode('utf-8'))['conciliacoes']
 
         return lista_conciliacoes_recebimentos_filiais_id
+
+    def conciliacoes_vendas_filiais_id(self, id_filial, client_id, dataInicial, dataFinal):
+        lista_conciliacoes_vendas_filiais_id = []
+       
+        r = self.http.request(
+            'GET', self.url + settings.URL_CONCILIACOES_VENDAS_FILIAIS_ID +'/'+ id_filial,
+            {'clienteId':client_id, 'dataInicial':dataInicial, 'dataFinal': dataFinal})
+
+        lista_conciliacoes_vendas_filiais_id = json.loads(r.data.decode('utf-8'))['conciliacoes']
+
+        return lista_conciliacoes_vendas_filiais_id

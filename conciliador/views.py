@@ -3,7 +3,7 @@ from conciliador.forms import Vendas, RetornosRecebimentos
 from conciliador.forms import Lancamento, LancamentoFilial, ConciliacoesVendasFiliais
 from conciliador.forms import ConciliacoesVendas, ConciliacoesRecebimentos, FormVenda
 from conciliador.forms import LancamentoPrevisao, ConciliacoesRecebimentosFiliais
-from conciliador.forms import ConciliacoesRecebimentosFiliaisId
+from conciliador.forms import ConciliacoesRecebimentosFiliaisId, ConciliacoesVendasFiliaisId
 from conciliador.engine_conciliation.concil import Concil
 
 def home(request):
@@ -251,3 +251,26 @@ def conciliacoes_recebimentos_filiais_id(request):
         form = ConciliacoesRecebimentosFiliaisId()
         data['form'] = form
     return render(request, 'conciliador/conciliacoes_recebimentos_filiais_id.html', data)
+
+def conciliacoes_vendas_filiais_id(request):
+    data = {}
+
+    if request.method == 'POST':
+        form = ConciliacoesVendasFiliaisId(request.POST or None)
+
+        if form.is_valid():
+            conc = Concil()        
+            lista = conc.conciliacoes_vendas_filiais_id(
+                id_filial = form.cleaned_data['id_filial'], 
+                client_id=form.cleaned_data['cliente_id'], 
+                dataInicial=form.cleaned_data['dataInicial'], 
+                dataFinal=form.cleaned_data['dataFinal'])    
+            form = ConciliacoesVendasFiliaisId()
+            data['form'] = form
+            data['lista'] = lista
+        else:
+            data['form'] = form
+    else:
+        form = ConciliacoesVendasFiliaisId()
+        data['form'] = form
+    return render(request, 'conciliador/conciliacoes_vendas_filiais_id.html', data)
