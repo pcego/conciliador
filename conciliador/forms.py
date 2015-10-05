@@ -55,3 +55,14 @@ class FormVenda(ModelForm):
     class Meta:
         model = Venda
         exclude = ['']
+
+class ConciliacoesRecebimentosFiliais(forms.Form):
+    cliente_id = forms.CharField(label='Codigo do cliente', max_length=20)
+    dataInicial = forms.CharField(label='Data inicial', max_length=100)
+    dataFinal = forms.CharField(label='Data final', max_length=100)
+
+class ConciliacoesRecebimentosFiliaisId(forms.Form):
+    id_filial = forms.CharField(label='Id da filial', max_length=20)
+    cliente_id = forms.CharField(label='Codigo do cliente', max_length=20)
+    dataInicial = forms.CharField(label='Data inicial', max_length=100)
+    dataFinal = forms.CharField(label='Data final', max_length=100)

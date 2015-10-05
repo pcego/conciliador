@@ -178,5 +178,7 @@ URL_CONCILIACOES_VENDAS = 'conciliacoes/vendas'
 URL_CONCILIACOES_RECEBIMENTOS = 'conciliacoes/recebimentos'
 URL_LANCAMENTOS_PREVISOES = 'lancamentos/previsoes'
 URL_CONCILIACOES_VENDAS_FILIAIS = 'conciliacoes/vendas/filiais'
+URL_CONCILIACOES_RECEBIMENTOS_FILIAIS = 'conciliacoes/recebimentos/filiais'
+URL_CONCILIACOES_RECEBIMENTOS_FILIAIS_ID = 'conciliacoes/recebimentos/filiais'
 #POST
 URL_VENDA = '/entradas/vendas'
