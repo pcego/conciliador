@@ -1,0 +1,15 @@
+- Terminar metodos faltantes
+- Refatorar todos os metodos para utilizarem objetos Django
+
+- Implementar area de cliente - Baiano
+- Deshboard com relatorios (Graficos)
+     - a conciliar
+     - conciliados
+     - nao conciliados (falha na conociliação)
+
+- Relatorio de conciliados e não conciliados e a conciliar- PC
+	- conter resumos
+	- totalizadores
+	
+- Exportação excel - GP
+- Exportação para pdf - GP

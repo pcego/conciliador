@@ -90,13 +90,13 @@ class Concil(object):
         return lista_conciliacoes_recebimentos
 
 
-    def lancamento_previsoes(self, client_id, dataInicial, dataFinal):
+    def lancamento_previsoes(self, client_id, data_inicial, data_final):
         
         lista_previsoes = []
        
         r = self.http.request(
             'GET', self.url + settings.URL_LANCAMENTOS_PREVISOES,
-            {'clienteId':client_id, 'dataInicial':dataInicial, 'dataFinal': dataFinal})
+            {'clienteId':client_id, 'dataInicial':data_inicial, 'dataFinal': data_final})
 
         lista_previsoes = json.loads(r.data.decode('utf-8'))['lancamentos']
 
