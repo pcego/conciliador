@@ -13,15 +13,23 @@ titulo
 	</form>
 
 	<ul>
-		{% for i in lista %}
-			<li>Produto: {{i.produto}}</li>
-			<li>Bandeira: {{i.bandeira}}</li>
-			<li>Adquirente: {{i.adquirente}}</li>
-			<li>Previsao do vencimento: {{i.dataDePrevisaoDoVencimento}}</li>
-			<li>Data da venda: {{i.dataVenda}}</li>
-			<li>Nota fiscal: {{i.notaFiscal}}</li>
-			<li>Status da conciliaçao: {{i.statusConciliacao}}</li>
-		{% endfor %}
+
+		{% if not lista %}
+			<h1>Nenhum dado encontrado</h1>
+		{% else %}
+
+			{% for i in lista %}
+				<li>Produto: {{i.produto}}</li>
+				<li>Bandeira: {{i.bandeira}}</li>
+				<li>Adquirente: {{i.adquirente}}</li>
+				<li>Previsao do vencimento: {{i.dataDePrevisaoDoVencimento}}</li>
+				<li>Data da venda: {{i.dataVenda}}</li>
+				<li>Nota fiscal: {{i.notaFiscal}}</li>
+				<li>Lancamento ID: {{i.lancamentoId}}</li>
+				<li>Status da conciliaçao: {{i.statusConciliacao}}</li>
+			{% endfor %}
+
+		{% endif %}
 	</ul>
 {% endblock %}
 

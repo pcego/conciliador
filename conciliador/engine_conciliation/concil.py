@@ -9,7 +9,8 @@ class Concil(object):
         self.url = settings.URL_MAIN
         self.http.headers['app-token'] = settings.APP_TOKEN
 
-    def retorno_vendas(self, client_id):
+    def retorno_vendas(self, client_id, statusConciliacao, dataInicial, 
+        dataFinal):
         lista_retornos = []
         lista_vendas = []
         venda = Venda()
@@ -18,12 +19,14 @@ class Concil(object):
             'GET', self.url + settings.URL_RETORNO_VENDAS,
             {'clienteId':client_id})
 
-        lista_vendas = json.loads(r.data.decode('utf-8'))['retornos']
-
-        for v in  lista_vendas:
-            venda.parse(v)
-            lista_retornos.append(venda)
-
+        try:
+            lista_vendas = json.loads(r.data.decode('utf-8'))['retornos'][0]
+            for v in  lista_vendas:
+                venda.parse(v)
+                lista_retornos.append(venda)
+        except Exception:
+            pass
+            # Gravar no log 
         return lista_retornos
 
     def retorno_recebimentos(self, client_id, status, dataInicial, 
@@ -113,3 +116,45 @@ class Concil(object):
         lista_conciliacoes_vendas_filiais = json.loads(r.data.decode('utf-8'))['conciliacoes']
 
         return lista_conciliacoes_vendas_filiais
+
+    def nova_venda(self, venda):
+        try:
+            r = self.http.request(
+                'GET', self.url + settings.URL_VENDA,
+                {'vendasRequest':venda})    
+            return True
+        except Exception:
+            return True
+
+    def conciliacoes_recebimentos_filiais(self, client_id, dataInicial, dataFinal):
+        lista_conciliacoes_recebimentos_filiais = []
+       
+        r = self.http.request(
+            'GET', self.url + settings.URL_CONCILIACOES_RECEBIMENTOS_FILIAIS,
+            {'clienteId':client_id, 'dataInicial':dataInicial, 'dataFinal': dataFinal})
+
+        lista_conciliacoes_recebimentos_filiais = json.loads(r.data.decode('utf-8'))['conciliacoes']
+
+        return lista_conciliacoes_recebimentos_filiais
+
+    def conciliacoes_recebimentos_filiais_id(self, id_filial, client_id , dataInicial, dataFinal):
+        lista_conciliacoes_recebimentos_filiais_id = []
+       
+        r = self.http.request(
+            'GET', self.url + settings.URL_CONCILIACOES_RECEBIMENTOS_FILIAIS_ID +'/'+ id_filial,
+            {'clienteId':client_id, 'dataInicial':dataInicial, 'dataFinal': dataFinal})
+
+        lista_conciliacoes_recebimentos_filiais_id = json.loads(r.data.decode('utf-8'))['conciliacoes']
+
+        return lista_conciliacoes_recebimentos_filiais_id
+
+    def conciliacoes_vendas_filiais_id(self, id_filial, client_id, dataInicial, dataFinal):
+        lista_conciliacoes_vendas_filiais_id = []
+       
+        r = self.http.request(
+            'GET', self.url + settings.URL_CONCILIACOES_VENDAS_FILIAIS_ID +'/'+ id_filial,
+            {'clienteId':client_id, 'dataInicial':dataInicial, 'dataFinal': dataFinal})
+
+        lista_conciliacoes_vendas_filiais_id = json.loads(r.data.decode('utf-8'))['conciliacoes']
+
+        return lista_conciliacoes_vendas_filiais_id

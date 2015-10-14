@@ -26,7 +26,7 @@ else:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # adjust to turn off when on Openshift, but allow an environment variable to override on PAAS
-DEBUG = not ON_PAAS
+DEBUG = True #not ON_PAAS
 DEBUG = DEBUG or os.getenv("debug","false").lower() == "true"
 
 if ON_PAAS and DEBUG:
@@ -178,3 +178,8 @@ URL_CONCILIACOES_VENDAS = 'conciliacoes/vendas'
 URL_CONCILIACOES_RECEBIMENTOS = 'conciliacoes/recebimentos'
 URL_LANCAMENTOS_PREVISOES = 'lancamentos/previsoes'
 URL_CONCILIACOES_VENDAS_FILIAIS = 'conciliacoes/vendas/filiais'
+URL_CONCILIACOES_VENDAS_FILIAIS_ID = 'conciliacoes/vendas/filiais'
+URL_CONCILIACOES_RECEBIMENTOS_FILIAIS = 'conciliacoes/recebimentos/filiais'
+URL_CONCILIACOES_RECEBIMENTOS_FILIAIS_ID = 'conciliacoes/recebimentos/filiais'
+#POST
+URL_VENDA = '/entradas/vendas'
