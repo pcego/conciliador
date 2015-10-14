@@ -1,14 +1,15 @@
 from django.shortcuts import render
-from conciliador.forms import Vendas, Recebimentos
-from conciliador.forms import Lancamento, LancamentoFilial
-from conciliador.forms import Vendas, Recebimentos
-from conciliador.forms import ConciliacoesVendas, ConciliacoesRecebimentos
+from conciliador.forms import Vendas, RetornosRecebimentos
+from conciliador.forms import Lancamento, LancamentoFilial, ConciliacoesVendasFiliais
+from conciliador.forms import ConciliacoesVendas, ConciliacoesRecebimentos, FormVenda
+from conciliador.forms import LancamentoPrevisao, ConciliacoesRecebimentosFiliais
+from conciliador.forms import ConciliacoesRecebimentosFiliaisId, ConciliacoesVendasFiliaisId
 from conciliador.engine_conciliation.concil import Concil
 
 def home(request):
     return render(request, 'conciliador/index.html')
 
-def vendas(request):
+def retornos_vendas(request):
     data = {}
 
     if request.method == 'POST':
@@ -16,7 +17,11 @@ def vendas(request):
 
         if form.is_valid():
             conc = Concil()        
-            lista = conc.retorno_vendas(client_id=form.cleaned_data['cliente_id'])
+            lista = conc.retorno_vendas(
+                client_id=form.cleaned_data['cliente_id'],
+                statusConciliacao=form.cleaned_data['statusConciliacao'],
+                dataInicial=form.cleaned_data['dataInicial'], 
+                dataFinal=form.cleaned_data['dataFinal'])    
             form = Vendas()
             data['form'] = form
             data['lista'] = lista
@@ -27,11 +32,11 @@ def vendas(request):
         data['form'] = form
     return render(request, 'conciliador/vendas.html', data)
 
-def recebimentos(request):
+def retornos_recebimentos(request):
     data = {}
 
     if request.method == 'POST':
-        form = Recebimentos(request.POST or None)
+        form = RetornosRecebimentos(request.POST or None)
 
         if form.is_valid():
             conc = Concil()        
@@ -40,15 +45,15 @@ def recebimentos(request):
                 dataInicial=form.cleaned_data['dataInicial'], dataFinal=form.cleaned_data['dataFinal'], 
                 adquirente=form.cleaned_data['adquirente'], bandeira=form.cleaned_data['bandeira'], 
                 tipoRetorno=form.cleaned_data['tipoRetorno'])
-            form = Recebimentos()
+            form = RetornosRecebimentos()
             data['form'] = form
             data['lista'] = lista
         else:
             data['form'] = form
     else:
-        form = Recebimentos()
+        form = RetornosRecebimentos()
         data['form'] = form
-    return render(request, 'conciliador/recebimentos.html', data)
+    return render(request, 'conciliador/retornos_recebimentos.html', data)
 
 def conciliacoes_vendas(request):
     data = {}
@@ -137,3 +142,139 @@ def conciliacoes_recebimentos(request):
         form = ConciliacoesRecebimentos()
         data['form'] = form
     return render(request, 'conciliador/conciliacoes_recebimentos.html', data)
+
+
+def lancamentos_previsoes(request):
+    
+    data = {}
+
+    if request.method == 'POST':
+        form = LancamentoPrevisao(request.POST or None)
+
+        if form.is_valid():
+            conc = Concil()        
+            lista = conc.lancamento_previsoes(
+                client_id=form.cleaned_data['cliente_id'], 
+                data_inicial=form.cleaned_data['data_inicial'], 
+                data_final=form.cleaned_data['data_final'])    
+            form = LancamentoPrevisao()
+            data['form'] = form
+            data['lista'] = lista
+        else:
+            data['form'] = form
+    else:
+        form = LancamentoPrevisao
+        data['form'] = form
+    return render(request, 'conciliador/lancamentos_previsoes.html', data)
+
+def conciliacoes_vendas_filiais(request):
+    data = {}
+
+    if request.method == 'POST':
+        form = ConciliacoesVendasFiliais(request.POST or None)
+
+        if form.is_valid():
+            conc = Concil()        
+            lista = conc.conciliacoes_vendas_filiais(
+                client_id=form.cleaned_data['cliente_id'], 
+                dataInicial=form.cleaned_data['dataInicial'], 
+                dataFinal=form.cleaned_data['dataFinal'])    
+            form = ConciliacoesVendasFiliais()
+            data['form'] = form
+            data['lista'] = lista
+        else:
+            data['form'] = form
+    else:
+        form = ConciliacoesVendasFiliais()
+        data['form'] = form
+    return render(request, 'conciliador/conciliacoes_vendas_filiais.html', data)
+
+
+def venda(request):
+    data = {}
+
+    if request.method == 'POST':
+        form = ConciliacoesVendasFiliais(request.POST or None)
+
+        if form.is_valid():
+            form.save()
+            conc = Concil()        
+            lista = conc.nova_venda(vendasRequest=form.cleaned_data['vendasRequest'])
+            data=['Venda salva com sucesso']
+            form = FormVenda()
+            data['form'] = form
+        else:
+            data['form'] = form
+    else:
+        form = FormVenda()
+        data['form'] = form
+
+    return render(request, 'conciliador/nova_vendas.html', data)
+
+def conciliacoes_recebimentos_filiais(request):
+    data = {}
+
+    if request.method == 'POST':
+        form = ConciliacoesRecebimentosFiliais(request.POST or None)
+
+        if form.is_valid():
+            conc = Concil()        
+            lista = conc.conciliacoes_recebimentos_filiais(
+                client_id=form.cleaned_data['cliente_id'], 
+                dataInicial=form.cleaned_data['dataInicial'], 
+                dataFinal=form.cleaned_data['dataFinal'])
+            form = ConciliacoesRecebimentosFiliais()
+            data['form'] = form
+            data['lista'] = lista
+        else:
+            data['form'] = form
+    else:
+        form = ConciliacoesRecebimentosFiliais()
+        data['form'] = form
+    return render(request, 'conciliador/conciliacoes_recebimentos_filiais.html', data)
+
+def conciliacoes_recebimentos_filiais_id(request):
+    data = {}
+
+    if request.method == 'POST':
+        form = ConciliacoesRecebimentosFiliaisId(request.POST or None)
+
+        if form.is_valid():
+            conc = Concil()        
+            lista = conc.conciliacoes_recebimentos_filiais_id(
+                id_filial = form.cleaned_data['id_filial'], 
+                client_id=form.cleaned_data['cliente_id'], 
+                dataInicial=form.cleaned_data['dataInicial'],
+                dataFinal=form.cleaned_data['dataFinal'])
+            form = ConciliacoesRecebimentosFiliaisId()
+            data['form'] = form
+            data['lista'] = lista
+        else:
+            data['form'] = form
+    else:
+        form = ConciliacoesRecebimentosFiliaisId()
+        data['form'] = form
+    return render(request, 'conciliador/conciliacoes_recebimentos_filiais_id.html', data)
+
+def conciliacoes_vendas_filiais_id(request):
+    data = {}
+
+    if request.method == 'POST':
+        form = ConciliacoesVendasFiliaisId(request.POST or None)
+
+        if form.is_valid():
+            conc = Concil()        
+            lista = conc.conciliacoes_vendas_filiais_id(
+                id_filial = form.cleaned_data['id_filial'], 
+                client_id=form.cleaned_data['cliente_id'], 
+                dataInicial=form.cleaned_data['dataInicial'], 
+                dataFinal=form.cleaned_data['dataFinal'])    
+            form = ConciliacoesVendasFiliaisId()
+            data['form'] = form
+            data['lista'] = lista
+        else:
+            data['form'] = form
+    else:
+        form = ConciliacoesVendasFiliaisId()
+        data['form'] = form
+    return render(request, 'conciliador/conciliacoes_vendas_filiais_id.html', data)

@@ -5,7 +5,7 @@ titulo
 {% endblock %}
 
 {% block main %}
-	<h1>Conciliações Recebimentos</h1>
+	<h1>Conciliações Recebimentos Filiais</h1>
 	<form method="POST">
 		{% csrf_token %}
 		{{ form }}
@@ -21,6 +21,10 @@ titulo
 			<li>Valor total de conta: {{i.valorConta}}</li>
 			<li>Valor total de contra partida: {{i.valorContrapartida}}</li>
 			<li>Diferença conciliada entre conta e contrapartida: {{i.diferenca}}</li>
+			<li>Valor total de contra partida: {{i.valorContrapartida}}</li>
+			<li>Nome da Filial: {{i.nomeFilial}}</li>
+			<li>Id da Filial no lado cliente,: {{i.filialCodigo}}</li>
+			<li>Id da Filial no lado concil: {{i.filialId}}</li>
 			<br><br>
 		{% endfor %}
 	</ul>
