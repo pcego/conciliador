@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
+
 
 {% block title %}
 titulo
@@ -8,8 +10,8 @@ titulo
 	<h1>Conciliações Recebimentos por Filial</h1>
 	<form method="POST">
 		{% csrf_token %}
-		{{ form }}
-		<button type='submit'>Consultar</button>
+		{{ form|bootstrap }}
+		<button type='submit' class="btn btn-main">Consultar</button>
 	</form>
 
 	<ul>
