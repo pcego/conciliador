@@ -5,7 +5,94 @@ titulo
 {% endblock %}
 
 {% block main %}
-main
+  <head>
+  <style type="text/css">
+    #container {
+        width: 100%;
+        border-color: blue;
+        text-align: center;
+    }
+
+    .box {
+        float: left;
+        width: 450px; height: 300px;
+        margin: 10px 20px;
+    }
+
+    #box-1 { background-color: white; }
+    #box-2 { background-color: white: }
+  </style>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <!-- Carregando pacotes grafico google-->
+    <script type="text/javascript">
+      google.load("visualization", "1.1", {packages:["bar", "corechart"]});
+    </script>
+    
+    <script type="text/javascript">
+
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Período', 'Vendas', 'Adquirentes'],
+          ['01/05/2015 a 30/05/2015', 999.11, 898.45]
+        ]);
+        var options = {
+          chart: {
+            title: 'Conciliações x Vendas',
+            subtitle: 'Texto texto texto texto texto',
+          },
+          bars: 'vertical',
+          vAxis: {format: 'decimal'},
+          colors: ['#1b9e77', '#d95f02']
+        };
+
+
+        var chart = new google.charts.Bar(document.getElementById('box-1'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+
+        var btns = document.getElementById('btn-group');
+
+      }
+    </script>
+
+    <script type="text/javascript">
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['CIELO',     4],
+          ['REDE',      3],
+          ['AMEX',  1.5],
+          ['HIPERCARD', 1.5],
+          ['TICKET',    1]
+        ]);
+
+        var options = {
+          title: '5 Bandeiras que mais vende'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('box-2'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+</head>
+
+<body>
+
+<div id="container">
+    <div id="box-1" class="box">1</div>
+    <div id="box-2" class="box">2</div>
+</div>
+
+
+</body>
+
 {% endblock %}
 
 {% block footer %}
