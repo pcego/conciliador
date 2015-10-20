@@ -64,7 +64,7 @@ class Concil(object):
             {'clienteId':client_id, 'dataInicial':data_inicial, 'dataFinal': data_final})
         
         lista_lancamentos = json.loads(r.data.decode('utf-8'))['lancamentos']
-        import pdb;pdb.set_trace()       
+                       
         return lista_lancamentos
 
 

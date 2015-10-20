@@ -118,8 +118,7 @@ def lancamentos_filiais(request):
             data['form'] = form
     else:
         form = LancamentoFilial()
-        data['form'] = form
-        #import pdb;pdb.set_trace()
+        data['form'] = form        
     return render(request, 'conciliador/lancamentos_filiais.html', data)
 
 
