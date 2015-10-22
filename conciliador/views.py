@@ -143,7 +143,7 @@ def conciliacoes_recebimentos(request):
     return render(request, 'conciliador/conciliacoes_recebimentos.html', data)
 
 
-def lancamentos_previsoes(request, client_id, data_inicial, data_final):
+def lancamentos_previsoes(request):
     
     data = {}
 

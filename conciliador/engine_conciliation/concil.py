@@ -158,3 +158,16 @@ class Concil(object):
         lista_conciliacoes_vendas_filiais_id = json.loads(r.data.decode('utf-8'))['conciliacoes']
 
         return lista_conciliacoes_vendas_filiais_id
+
+
+    def lancamento_recebimentos(self, client_id, data_inicial, data_final):
+        
+        lista_recebimentos = []
+       
+        r = self.http.request(
+            'GET', self.url + settings.URL_LANCAMENTOS_PREVISOES,
+            {'clienteId':client_id, 'dataInicial':data_inicial, 'dataFinal': data_final})
+
+        lista_recebimentos = json.loads(r.data.decode('utf-8'))['lancamentos']
+
+        return lista_previsoes
