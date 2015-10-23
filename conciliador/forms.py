@@ -74,3 +74,9 @@ class ConciliacoesVendasFiliaisId(forms.Form):
     cliente_id = forms.CharField(label='Codigo do cliente', max_length=100)
     dataInicial = forms.CharField(label='Data inicial', max_length=100)
     dataFinal = forms.CharField(label='Data final', max_length=100)
+
+class LancamentoRecebimento(forms.Form):
+    cliente_id = forms.CharField(label='Código do Cliente', max_length = 100)
+    data_inicial = forms.CharField(label='Data Inicial', max_length=20)
+    data_final = forms.CharField(label='Data Final', max_length=20)
+    limite = forms.IntegerField(label='Limite Resultados')

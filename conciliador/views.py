@@ -1,9 +1,14 @@
 from django.shortcuts import render
 from conciliador.forms import Vendas, RetornosRecebimentos
-from conciliador.forms import Lancamento, LancamentoFilial, ConciliacoesVendasFiliais
-from conciliador.forms import ConciliacoesVendas, ConciliacoesRecebimentos, FormVenda
-from conciliador.forms import LancamentoPrevisao, ConciliacoesRecebimentosFiliais
-from conciliador.forms import ConciliacoesRecebimentosFiliaisId, ConciliacoesVendasFiliaisId
+from conciliador.forms import ConciliacoesVendasFiliais
+from conciliador.forms import Lancamento, LancamentoFilial
+from conciliador.forms import ConciliacoesRecebimentos, FormVenda
+from conciliador.forms import ConciliacoesVendas
+from conciliador.forms import LancamentoPrevisao
+from conciliador.forms import ConciliacoesRecebimentosFiliais
+from conciliador.forms import ConciliacoesRecebimentosFiliaisId
+from conciliador.forms import ConciliacoesVendasFiliaisId
+from conciliador.forms import LancamentoRecebimento
 from conciliador.engine_conciliation.concil import Concil
 
 def home(request):
@@ -277,3 +282,29 @@ def conciliacoes_vendas_filiais_id(request):
         form = ConciliacoesVendasFiliaisId()
         data['form'] = form
     return render(request, 'conciliador/conciliacoes_vendas_filiais_id.html', data)
+
+
+def lancamentos_recebimentos(request):
+    
+    data = {}
+
+    if request.method == 'POST':
+        form = LancamentoRecebimento(request.POST or None)
+
+        if form.is_valid():
+            conc = Concil()        
+            lista = conc.lancamento_recebimentos(
+                client_id=form.cleaned_data['cliente_id'], 
+                data_inicial=form.cleaned_data['data_inicial'], 
+                data_final=form.cleaned_data['data_final'],    
+                limite=form.cleaned_data['limite'])  
+
+            form = LancamentoRecebimento()
+            data['form'] = form
+            data['lista'] = lista
+        else:
+            data['form'] = form
+    else:
+        form = LancamentoRecebimento()
+        data['form'] = form
+    return render(request, 'conciliador/lancamentos_recebimentos.html', data)
