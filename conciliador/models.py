@@ -213,3 +213,89 @@ class Venda(models.Model):
 
     def __str__(self):
         return str(self.clienteId)
+
+class ConciliacoesVendas(models.Model):
+    quantidadeLancamentosConta = models.IntegerField()
+    quantidadeLancamentosContrapartida = models.IntegerField()
+    valorConta = models.FloatField()
+    valorContraPartida = models.FloatField()
+    diferenca = models.FloatField()
+    bandeira = models.CharField(max_length=150)
+    adquirente = models.CharField(max_length=150)
+
+    def __str__(self):
+        return str(self.quantidadeLancamentosConta)
+
+class ConciliacoesVendasFiliais(models.Model):
+    quantidadeLancamentosConta = models.IntegerField()
+    quantidadeLancamentosContrapartida = models.IntegerField()
+    valorConta = models.FloatField()
+    valorContraPartida = models.FloatField()
+    diferenca = models.FloatField()
+    bandeira = models.CharField(max_length=150)
+    adquirente = models.CharField(max_length=150)
+    nomeFilial = models.CharField(max_length=150)
+    filialCodigo = models.CharField(max_length=150)
+    filialId = models.IntegerField()
+
+    def __str__(self):
+        return str(self.nomeFilial)
+
+class ConciliacoesVendasFiliaisID(models.Model):
+    quantidadeLancamentosConta = models.IntegerField()
+    quantidadeLancamentosContrapartida = models.IntegerField()
+    valorConta = models.FloatField()
+    valorContraPartida = models.FloatField()
+    diferenca = models.FloatField()
+    bandeira = models.CharField(max_length=150)
+    adquirente = models.CharField(max_length=150)
+    nomeFilial = models.CharField(max_length=150)
+    filialCodigo = models.CharField(max_length=150)
+    filialId = models.IntegerField()
+
+    def __str__(self):
+        return str(self.nomeFilial)
+
+class ConciliacoesRecebimentos(models.Model):
+    quantidadeLancamentosConta = models.IntegerField()
+    quantidadeLancamentosContrapartida = models.IntegerField()
+    valorConta = models.FloatField()
+    valorContraPartida = models.FloatField()
+    diferenca = models.FloatField()
+    bandeira = models.CharField(max_length=150)
+    adquirente = models.CharField(max_length=150)
+
+    def __str__(self):
+        return str(self.quantidadeLancamentosConta)
+
+
+class ConciliacoesRecebimentosFiliais(models.Model):
+    quantidadeLancamentosConta = models.IntegerField()
+    quantidadeLancamentosContrapartida = models.IntegerField()
+    valorConta = models.FloatField()
+    valorContraPartida = models.FloatField()
+    diferenca = models.FloatField()
+    bandeira = models.CharField(max_length=150)
+    adquirente = models.CharField(max_length=150)
+    nomeFilial = models.CharField(max_length=150)
+    filialCodigo = models.CharField(max_length=150)
+    filialId = models.IntegerField()
+
+    def __str__(self):
+        return str(self.nomeFilial)
+
+
+class ConciliacoesRecebimentosFiliaisID(models.Model):
+    quantidadeLancamentosConta = models.IntegerField()
+    quantidadeLancamentosContrapartida = models.IntegerField()
+    valorConta = models.FloatField()
+    valorContraPartida = models.FloatField()
+    diferenca = models.FloatField()
+    bandeira = models.CharField(max_length=150)
+    adquirente = models.CharField(max_length=150)
+    nomeFilial = models.CharField(max_length=150)
+    filialCodigo = models.CharField(max_length=150)
+    filialId = models.IntegerField()
+
+    def __str__(self):
+        return str(self.nomeFilial)
