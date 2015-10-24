@@ -9,6 +9,7 @@ from conciliador.forms import ConciliacoesRecebimentosFiliais
 from conciliador.forms import ConciliacoesRecebimentosFiliaisId
 from conciliador.forms import ConciliacoesVendasFiliaisId
 from conciliador.forms import LancamentoRecebimento
+from conciliador.forms import LancamentoRecebimentoFilial
 from conciliador.engine_conciliation.concil import Concil
 
 def home(request):
@@ -308,3 +309,29 @@ def lancamentos_recebimentos(request):
         form = LancamentoRecebimento()
         data['form'] = form
     return render(request, 'conciliador/lancamentos_recebimentos.html', data)
+
+
+
+def lancamentos_recebimentos_filiais(request):
+    
+    data = {}
+
+    if request.method == 'POST':
+        form = LancamentoRecebimentoFilial(request.POST or None)
+
+        if form.is_valid():
+            conc = Concil()        
+            lista = conc.lancamentos_recebimentos_filiais(
+                client_id=form.cleaned_data['cliente_id'], 
+                data_inicial=form.cleaned_data['data_inicial'], 
+                data_final=form.cleaned_data['data_final'])  
+
+            form = LancamentoRecebimentoFilial()
+            data['form'] = form
+            data['lista'] = lista
+        else:
+            data['form'] = form
+    else:
+        form = LancamentoRecebimentoFilial()
+        data['form'] = form
+    return render(request, 'conciliador/lancamentos_receb_filiais.html', data)

@@ -80,3 +80,8 @@ class LancamentoRecebimento(forms.Form):
     data_inicial = forms.CharField(label='Data Inicial', max_length=20)
     data_final = forms.CharField(label='Data Final', max_length=20)
     limite = forms.IntegerField(label='Limite Resultados')
+
+class LancamentoRecebimentoFilial(forms.Form):
+    cliente_id = forms.CharField(label='Código do Cliente', max_length = 100)
+    data_inicial = forms.CharField(label='Data Inicial', max_length=20)
+    data_final = forms.CharField(label='Data Final', max_length=20)    
