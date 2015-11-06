@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block title %}
+titulo
+{% endblock %}
+
+{% block main %}
+	<h1>Lancamentos</h1>
+	<form method="POST">
+		{% csrf_token %}
+		{{ form|bootstrap }}
+		<button type='submit' class="btn btn-main">Consultar</button>
+	</form>
+	<br><br>
+	<ul>
+		{% for lancamento in lista %}			
+			<li>Adquirente: {{lancamento.adquirente}}</li>			
+			<li>Agencia: {{lancamento.agencia}}</li>			
+			<li>Banco: {{lancamento.banco}}</li>			
+			<li>Bandeira: {{lancamento.bandeira}}</li>			
+			<li>Conta Bancária: {{lancamento.contaBancaria}}</li>			
+			<li>Código Filial: {{lancamento.filialCodigo}}</li>			
+			<li>Filial Id: {{lancamento.filialId}}</li>			
+			<li>Quantidade de Lançamentos Contra:{{lancamento.quantidadeLanctosContra}}</li>		
+			<li>Valor Liquido: {{lancamento.valorLiquido}}</li>
+			<br><br>			
+		{% endfor %}
+	</ul>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

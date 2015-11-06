@@ -185,3 +185,16 @@ class Concil(object):
         lista_recebimentos_filiais = json.loads(r.data.decode('utf-8'))['lancamentos']
 
         return lista_recebimentos_filiais
+
+
+    def lancamentos_previsoes_filiais(self, client_id, data_inicial, data_final):
+        
+        lista_previsoes_filiais = []
+       
+        r = self.http.request(
+            'GET', self.url + settings.URL_LANCAMENTOS_PREVISOES_FILIAIS,
+            {'clienteId':client_id, 'dataInicial':data_inicial, 'dataFinal': data_final})
+
+        lista_previsoes_filiais = json.loads(r.data.decode('utf-8'))['lancamentos']
+
+        return lista_previsoes_filiais

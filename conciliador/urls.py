@@ -11,10 +11,10 @@ urlpatterns = [
     url(r'^lancamentos/vendas$', 
     	'conciliador.views.lancamentos_vendas', 
     	name='url_lancamentos'),
-    url(r'^lancamentos/vendas/filiais', 
+    url(r'^lancamentos/vendas/filiais$', 
     	'conciliador.views.lancamentos_filiais', 
-    	name='url_lancamentos_filiais'),      
-    url(r'^lancamentos/previsoes', 
+    	name='url_lancamentos_filiais'),    
+    url(r'^lancamentos/previsoes$', 
     	'conciliador.views.lancamentos_previsoes', 
     	name='url_lancamentos_previsoes'), 
     url(r'^conciliacoes/recebimentos$', 
@@ -43,6 +43,8 @@ urlpatterns = [
     url(r'^lancamentos/recebimentos/filiais$', 
         'conciliador.views.lancamentos_recebimentos_filiais', 
         name='url_lancamentos_recebimentos_filiais'),
-
-
+     url(r'^lancamentos/previsoes/filiais', 
+        'conciliador.views.lancamentos_previsoes_filiais', 
+        name='url_lancamentos_previsoes_filiais'),      
+   
 ]
