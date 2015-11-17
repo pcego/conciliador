@@ -1,6 +1,5 @@
 from django import forms
 from conciliador.models import Venda
-from conciliador.models import LancamentoRecebimento
 from django.forms import ModelForm
 
 class Vendas(forms.Form):
@@ -25,7 +24,7 @@ class ConciliacoesVendas(forms.Form):
     data_Final = forms.CharField(label='Data Final', max_length=20)
 
 
-class Lancamento(forms.Form):
+class Lancamento(forms.Form):   
     cliente_id = forms.CharField(label='Código do Cliente', max_length = 100)
     data_inicial = forms.CharField(label='Data Inicial', max_length=20)
     data_final = forms.CharField(label='Data Final', max_length=20)

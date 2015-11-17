@@ -299,16 +299,3 @@ class ConciliacoesRecebimentosFiliaisID(models.Model):
 
     def __str__(self):
         return str(self.nomeFilial)
-
-class LancamentoRecebimento(models.Model):
-
-    adquirente = models.CharField(max_length=150)
-    bandeira = models.CharField(max_length = 150)
-    quant_lanc_conta = models.IntegerField()
-    quant_lançamentos_contra = models.IntegerField()
-    valor_total_conta = models.FloatField()
-    valor_contra_partida = models.FloatField()
-    dif_conc = models.FloatField()
-
-    def __str__(self):
-        return str(self.adquirente)
